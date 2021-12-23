@@ -6,13 +6,15 @@ const Singup = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [conpassword, setConpassword] = useState('')
+    const [message, setMessage] = useState('')
 
     const submitHandler=(e)=>{
         e.preventDefault()
         console.log(email, password)
         if(password !== conpassword){
-            // setMessage('Password do not match')
+            setMessage('Password do not match')
             console.log("Password Missmatch")
+
         }else{
             axios.post('http://localhost:8000/api/register', {name,email,password})
             .then(response => {
@@ -27,6 +29,7 @@ const Singup = () => {
     return (
         <div className='container'>
             <form onSubmit={submitHandler}>
+            {message && <div>{message}</div>}
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Name</label>
                     <input type="text" className="form-control" id="exampleInputEmail1" name="name"aria-describedby="emailHelp" placeholder="Enter Name"onChange={(e) => setName(e.target.value)} />
