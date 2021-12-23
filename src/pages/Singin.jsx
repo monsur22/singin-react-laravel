@@ -24,12 +24,9 @@ const Singin =  () => {
 
       axios.post('http://localhost:8000/api/login', {email,password})
       .then(response => {
-        // if (response.data.accessToken) {
-          localStorage.setItem("userInfo", JSON.stringify(response.data.access_token));
-        // }
-
-        // return response.data;
+        localStorage.setItem("userInfo", JSON.stringify(response.data.access_token));
         console.log(response.data.access_token)
+        
       });
 
     }

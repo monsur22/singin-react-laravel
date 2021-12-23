@@ -24,7 +24,7 @@ const Header = () => {
                         <Nav.Link href=""><Link to={'/Singin'}>Singin</Link></Nav.Link>
                         <Nav.Link href=""><Link to={'/Singup'}>SingUp</Link></Nav.Link>
                         {
-                            localStorage.getItem('token') ?
+                            localStorage.getItem('userInfo') ?
                         <Nav.Link href=""><Link to={'/'}>Logout</Link></Nav.Link>
                         :
                         null
