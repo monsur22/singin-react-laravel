@@ -11,6 +11,11 @@ import {
 } from 'react-bootstrap'
 const Header = () => {
 
+    const logoutHandler = () => {
+        localStorage.removeItem('userInfo');
+        window.location.reload();
+    }
+
 
     return (
         <div>
@@ -25,7 +30,7 @@ const Header = () => {
                         <Nav.Link href=""><Link to={'/Singup'}>SingUp</Link></Nav.Link>
                         {
                             localStorage.getItem('userInfo') ?
-                        <Nav.Link href=""><Link to={'/'}>Logout</Link></Nav.Link>
+                        <Nav.Link href="" onClick={logoutHandler}>Logout</Nav.Link>
                         :
                         null
 
