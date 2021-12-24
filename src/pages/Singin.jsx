@@ -5,10 +5,11 @@ import {
     Button,
 
 } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
 const Singin =  () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    const  navigate = useNavigate();
     const submitHandler = (e) =>{
         e.preventDefault()
         console.log(email, password)
@@ -26,7 +27,7 @@ const Singin =  () => {
       .then(response => {
         localStorage.setItem("userInfo", JSON.stringify(response.data.access_token));
         console.log(response.data.access_token)
-        
+        navigate("/")
       });
 
     }
