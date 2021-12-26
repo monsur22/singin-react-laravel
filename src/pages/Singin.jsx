@@ -1,35 +1,27 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
-import {
-    Form,
-    Button,
-
-} from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../actions/userAction';
+
 const Singin =  () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const  navigate = useNavigate();
+
+    const dispatch = useDispatch()
+    const userLogin = useSelector((state) => state.userLogin)
+    const { error, userInfo } = userLogin
+
+    useEffect(() => {
+        if (userInfo){
+            navigate("/")
+        }
+    }, [ userInfo])
+
     const submitHandler = (e) =>{
         e.preventDefault()
-        console.log(email, password)
-        // const config ={
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-
-        // }
-        // const data =  axios.post('http://localhost:8000/api/login',{email, password, config})
-        // console.log(data)
-        // localStorage.setItem('userInfo', JSON.stringify(data))
-
-      axios.post('http://localhost:8000/api/login', {email,password})
-      .then(response => {
-        localStorage.setItem("userInfo", JSON.stringify(response.data.access_token));
-        console.log(response.data.access_token)
-        navigate("/")
-      });
-
+        dispatch(login(email, password))
     }
 
     return (

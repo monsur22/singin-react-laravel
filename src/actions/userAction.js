@@ -11,7 +11,7 @@ export const login = (email, password) =>  async (dispatch) => {
             }
 
         }
-        const {data} = await axios.post('/api/users/login',{email, password, config})
+        const {data} = await axios.post('http://localhost:8000/api/login',{email, password, config})
         dispatch({ type: USER_LOGIN_SUCCESS, payload: data})
 
         localStorage.setItem('userInfo', JSON.stringify(data))
@@ -25,9 +25,6 @@ export const logout = () =>  async (dispatch) => {
     localStorage.removeItem('userInfo')
 
     dispatch({ type: USER_LOGOUT})
-    dispatch({ type: USER_DETAILS_RESET})
-    dispatch({ type: ORDER_LIST_MY_RESET})
-    dispatch({ type: USER_LIST_RESET })
 
 
 
