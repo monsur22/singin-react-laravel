@@ -13,9 +13,11 @@ const Singin =  () => {
     const userLogin = useSelector((state) => state.userLogin)
     const { error, userInfo } = userLogin
 
+
     useEffect(() => {
         if (userInfo){
-            navigate("/")
+            navigate('/')
+            // navigate('/home', {replace: true});
         }
     }, [ userInfo])
 
