@@ -1,5 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { register } from '../actions/userAction';
+import { useNavigate } from 'react-router-dom';
 
 const Singup = () => {
     const [name, setName] = useState('')
@@ -7,6 +11,21 @@ const Singup = () => {
     const [password, setPassword] = useState('')
     const [conpassword, setConpassword] = useState('')
     const [message, setMessage] = useState('')
+
+
+    const dispatch = useDispatch()
+    const userRegister = useSelector((state) => state.userRegister)
+    const { loading, error, userInfo } = userRegister
+
+    const  navigate = useNavigate();
+
+    useEffect(() => {
+        if (userInfo){
+            // history.push(redirect)
+            navigate('/')
+
+        }
+    }, [ userInfo])
 
     const submitHandler=(e)=>{
         e.preventDefault()
@@ -16,13 +35,15 @@ const Singup = () => {
             console.log("Password Missmatch")
 
         }else{
-            axios.post('http://localhost:8000/api/register', {name,email,password})
-            .then(response => {
-            //   localStorage.setItem("userInfo", JSON.stringify(response.data.access_token));
-            //   console.log(response.data.access_token)
-            console.log("Registration success")
+            // axios.post('http://localhost:8000/api/register', {name,email,password})
+            // .then(response => {
+            // //   localStorage.setItem("userInfo", JSON.stringify(response.data.access_token));
+            // //   console.log(response.data.access_token)
+            // console.log("Registration success")
 
-            });
+            // });
+            dispatch(register(name, email, password))
+
         }
 
     }
