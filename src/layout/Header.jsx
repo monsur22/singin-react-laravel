@@ -2,6 +2,8 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
+
 import {
     Nav,
     Navbar,
@@ -9,11 +11,19 @@ import {
     NavDropdown,
 
 } from 'react-bootstrap'
+import { logout } from '../actions/userAction'
+
 const Header = () => {
+    const dispatch = useDispatch()
+
+    const userLogin = useSelector(state => state.userLogin)
+    const {userInfo} = userLogin
 
     const logoutHandler = () => {
-        localStorage.removeItem('userInfo');
-        window.location.reload();
+        // localStorage.removeItem('userInfo');
+        // window.location.reload();
+        dispatch(logout())
+
     }
 
 
@@ -26,14 +36,21 @@ const Header = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href=""><Link to={'/'}>Home</Link></Nav.Link>
-                        <Nav.Link href=""><Link to={'/Singin'}>Singin</Link></Nav.Link>
-                        <Nav.Link href=""><Link to={'/Singup'}>SingUp</Link></Nav.Link>
                         {
-                            localStorage.getItem('userInfo') ?
-                        <Nav.Link href="" onClick={logoutHandler}>Logout</Nav.Link>
-                        :
-                        null
+                            userInfo ? (
+                            <Nav.Link href=""><Link to={'/Profile'}>{userInfo.name}</Link></Nav.Link>
 
+                        ): <Nav.Link href=""><Link to={'/Singin'}>Singin</Link></Nav.Link>
+
+                        }
+                        <Nav.Link href=""><Link to={'/Singup'}>SingUp</Link></Nav.Link>
+                
+                        {
+                            userInfo ? (
+                                <Nav.Link href="" onClick={logoutHandler}>Logout</Nav.Link>
+
+
+                        ):  <a href=""></a>
                         }
 
                     </Nav>
