@@ -40,17 +40,19 @@ const Header = () => {
                             userInfo ? (
                             <Nav.Link href=""><Link to={'/Profile'}>{userInfo.name}</Link></Nav.Link>
 
-                        ): <Nav.Link href=""><Link to={'/Singin'}>Singin</Link></Nav.Link>
+                        ):
+                        <Nav.Link href=""><Link to={'/Singin'}>Singin</Link></Nav.Link>
+
 
                         }
-                        <Nav.Link href=""><Link to={'/Singup'}>SingUp</Link></Nav.Link>
-                
+
                         {
                             userInfo ? (
                                 <Nav.Link href="" onClick={logoutHandler}>Logout</Nav.Link>
 
 
-                        ):  <a href=""></a>
+                        ):
+                        <Nav.Link href=""><Link to={'/Singup'}>SingUp</Link></Nav.Link>
                         }
 
                     </Nav>
