@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../actions/userAction';
 
-const Singin =  () => {
+const Singin =  ({location}) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const  navigate = useNavigate();
@@ -13,11 +13,11 @@ const Singin =  () => {
     const userLogin = useSelector((state) => state.userLogin)
     const { error, userInfo } = userLogin
 
-
+    // const redirect = location.state ? location.state.split('=')[1] : '/'
     useEffect(() => {
         if (userInfo){
-            navigate('/')
-            // navigate('/home', {replace: true});
+            // navigate(redirect,{replace: true})
+            navigate('/', {replace: true});
         }
     }, [ userInfo])
 
